@@ -1,5 +1,6 @@
 package BitArray
 
+import java.util.Arrays
 import java.util.BitSet
 
 class BitArray {
@@ -8,13 +9,19 @@ class BitArray {
     constructor() {
 
     }
-    fun addBitBack(Bit:Boolean) {
+    constructor(Size:Int,Fill:Boolean = false) : this() {
+        for(i in 0..Size-1) {
+            AddBitBack(Fill)
+        }
+    }
+    constructor(other:BitArray) : this() {this.Array += other.Array}
+    fun AddBitBack(Bit:Boolean) {
         Array.add(Bit)
     }
-    fun addBitFront(Bit: Boolean) {
+    fun AddBitFront(Bit: Boolean) {
         Array.add(0,Bit)
     }
-    fun addBitAt(Index:Int,Bit: Boolean) {
+    fun AddBitAt(Index:Int,Bit: Boolean) {
         Array.add(Index,Bit)
     }
     fun RemoveBack() {
@@ -31,13 +38,7 @@ class BitArray {
         Array.removeAt(Index)
     }
 
-    constructor(Size:Int,Fill:Boolean = false) : this() {
-        for(i in 0..Size-1) {
-            addBitBack(Fill)
-        }
-    }
-    constructor(other:BitArray) : this() {this.Array += other.Array}
-    fun clear() {
+    fun Clear() {
         Array.clear()
     }
     override fun toString(): String {
@@ -53,6 +54,9 @@ class BitArray {
     operator fun get(Index: Int):Boolean {
         return Array[Index]
     }
+    operator fun set(Index:Int,Value:Boolean) {
+        this.Array[Index] = Value
+    }
     operator fun not():BitArray {
          var temp = BitArray(this)
         for (i in 0..temp.Size()-1) {
@@ -64,5 +68,21 @@ class BitArray {
     operator fun plus(other: BitArray):BitArray {
         this.Array += other.Array
         return this
+    }
+    fun Copy(other: BitArray) {
+        this.Clear()
+        this.Array += other.Array
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (other !is BitArray) return false
+        return other.Array == this.Array
+    }
+   fun Fill(Value: Boolean) {
+       Array.fill(Value)
+   }
+    fun Resize(Size:Int,Value:Boolean = false) {
+        while(Size != this.Size()) {AddBitBack(Value)}
     }
 }
