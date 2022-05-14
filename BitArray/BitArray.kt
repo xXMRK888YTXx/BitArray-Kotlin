@@ -1,5 +1,7 @@
 package BitArray
 
+import java.util.BitSet
+
 class BitArray {
     private val Array = mutableListOf<Boolean>()
     fun Size():Int {return Array.size}
@@ -35,7 +37,9 @@ class BitArray {
         }
     }
     constructor(other:BitArray) : this() {this.Array += other.Array}
-
+    fun clear() {
+        Array.clear()
+    }
     override fun toString(): String {
         return Array.toString()
     }
@@ -54,5 +58,9 @@ class BitArray {
             temp[i] = !temp[i]
         }
         return temp
+    }
+    operator fun plus(other: BitArray):BitArray {
+        this.Array += other.Array
+        return this
     }
 }
