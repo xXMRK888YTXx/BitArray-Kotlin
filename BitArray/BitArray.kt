@@ -1,39 +1,32 @@
 package BitArray
 
 class BitArray {
-    private var Array = mutableListOf<Boolean>()
-    private var Size:UInt = 0u
-    fun Size():UInt {return Size}
+    private val Array = mutableListOf<Boolean>()
+    fun Size():Int {return Array.size}
     constructor() {
 
     }
     fun addBitBack(Bit:Boolean) {
         Array.add(Bit)
-        Size++
     }
     fun addBitFront(Bit: Boolean) {
         Array.add(0,Bit)
-        Size++
     }
     fun addBitAt(Index:Int,Bit: Boolean) {
         Array.add(Index,Bit)
-        Size++
     }
     fun RemoveBack() {
-        if(Size != 0u) {
+        if(Size() != 0) {
             Array.removeLast()
-            Size--
         }
     }
     fun RemoveFront() {
-        if(Size != 0u) {
+        if(Size() != 0) {
             Array.removeFirst()
-            Size--
         }
     }
     fun RemoveAt(Index: Int) {
         Array.removeAt(Index)
-        Size--
     }
 
     constructor(Size:Int,Fill:Boolean = false) : this() {
@@ -41,8 +34,10 @@ class BitArray {
             addBitBack(Fill)
         }
     }
+    constructor(other:BitArray) : this() {this.Array += other.Array}
 
     override fun toString(): String {
         return Array.toString()
     }
+    fun clear() {Array.clear()}
 }
