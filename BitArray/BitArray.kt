@@ -39,5 +39,20 @@ class BitArray {
     override fun toString(): String {
         return Array.toString()
     }
-    fun clear() {Array.clear()}
+    fun toInt() : MutableList<Int> {
+        var Bits:MutableList<Int> = mutableListOf()
+        for(i in Array) {
+            if (i) Bits += 1 else Bits += 0
+        }
+        return Bits
+    }
+
+    operator fun not():MutableList<Boolean> {
+         var temp:MutableList<Boolean> = mutableListOf()
+        temp += this.Array
+        for(i in 0..temp.lastIndex) {
+            temp[i] = !temp[i]
+        }
+        return temp
+    }
 }
