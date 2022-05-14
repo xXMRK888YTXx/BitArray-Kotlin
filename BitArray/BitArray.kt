@@ -3,7 +3,7 @@ package BitArray
 import java.util.BitSet
 
 class BitArray {
-    private val Array = mutableListOf<Boolean>()
+    private var Array = mutableListOf<Boolean>()
     fun Size():Int {return Array.size}
     constructor() {
 
@@ -50,13 +50,15 @@ class BitArray {
         }
         return Bits
     }
-
-    operator fun not():MutableList<Boolean> {
-         var temp:MutableList<Boolean> = mutableListOf()
-        temp += this.Array
-        for(i in 0..temp.lastIndex) {
-            temp[i] = !temp[i]
+    operator fun get(Index: Int):Boolean {
+        return Array[Index]
+    }
+    operator fun not():BitArray {
+         var temp = BitArray(this)
+        for (i in 0..temp.Size()-1) {
+            temp.Array[i] = temp.Array[i].not()
         }
+
         return temp
     }
     operator fun plus(other: BitArray):BitArray {
