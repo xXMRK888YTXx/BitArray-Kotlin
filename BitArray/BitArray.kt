@@ -7,14 +7,38 @@ class BitArray {
     constructor() {
 
     }
-    fun addBit(Bit:Boolean) {
+    fun addBitBack(Bit:Boolean) {
         Array.add(Bit)
         Size++
+    }
+    fun addBitFront(Bit: Boolean) {
+        Array.add(0,Bit)
+        Size++
+    }
+    fun addBitAt(Index:Int,Bit: Boolean) {
+        Array.add(Index,Bit)
+        Size++
+    }
+    fun RemoveBack() {
+        if(Size != 0u) {
+            Array.removeLast()
+            Size--
+        }
+    }
+    fun RemoveFront() {
+        if(Size != 0u) {
+            Array.removeFirst()
+            Size--
+        }
+    }
+    fun RemoveAt(Index: Int) {
+        Array.removeAt(Index)
+        Size--
     }
 
     constructor(Size:Int,Fill:Boolean = false) : this() {
         for(i in 0..Size-1) {
-            addBit(Fill)
+            addBitBack(Fill)
         }
     }
 
