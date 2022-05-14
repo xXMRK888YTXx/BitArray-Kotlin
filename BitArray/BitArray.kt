@@ -83,6 +83,29 @@ class BitArray {
        Array.fill(Value)
    }
     fun Resize(Size:Int,Value:Boolean = false) {
-        while(Size != this.Size()) {AddBitBack(Value)}
+        while(Size > this.Size()) {AddBitBack(Value)}
+    }
+    private fun ResizePrivate(Size: Int) {
+        while(Size > this.Size()) {AddBitFront(false)}
+    }
+    fun And(other: BitArray) :BitArray {
+        var ThisOb = BitArray(this)
+        var OtherOb = BitArray(other)
+        if(ThisOb.Size() < OtherOb.Size()) {ThisOb.ResizePrivate(OtherOb.Size())}
+        if(ThisOb.Size() > OtherOb.Size()) {OtherOb.ResizePrivate(ThisOb.Size())}
+        for(i in 0..ThisOb.Size()-1) {
+            ThisOb[i] =  ThisOb[i].and(OtherOb[i])
+        }
+        return ThisOb
+    }
+    fun Or(other: BitArray) :BitArray {
+        var ThisOb = BitArray(this)
+        var OtherOb = BitArray(other)
+        if(ThisOb.Size() < OtherOb.Size()) {ThisOb.ResizePrivate(OtherOb.Size())}
+        if(ThisOb.Size() > OtherOb.Size()) {OtherOb.ResizePrivate(ThisOb.Size())}
+        for(i in 0..ThisOb.Size()-1) {
+            ThisOb[i] =  ThisOb[i].or(OtherOb[i])
+        }
+        return ThisOb
     }
 }
