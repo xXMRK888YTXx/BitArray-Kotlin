@@ -3,11 +3,10 @@ package BitArray
 import kotlin.math.pow
 
 
-class BitArray {
+class BitArray() {
     private var Array = mutableListOf<Boolean>()
     fun Size():Int {return Array.size}
     fun lastindex():Int {return Size() - 1}
-    constructor() {}
 
     companion object {
         fun ToBinaty(Value: Long):BitArray {
@@ -38,6 +37,25 @@ class BitArray {
         }
     }
     constructor(other:BitArray) : this() {this.Array += other.Array}
+    constructor(vararg Values: Boolean) : this(){
+        Array += Values.toMutableList()
+    }
+    constructor(vararg ValuesInt: Int) : this() {
+        for(i in 0..ValuesInt.lastIndex) {
+            when(ValuesInt[i]) {
+                0 -> AddBitBack(false)
+                else -> AddBitBack(true)
+            }
+        }
+    }
+    constructor(String:String) : this() {
+        for(i in 0..String.lastIndex) {
+            when(String[i]) {
+                '0' ->AddBitBack(false)
+                '1' -> AddBitBack(true)
+            }
+        }
+    }
     fun AddBitBack(Bit:Boolean) {
         Array.add(Bit)
     }
