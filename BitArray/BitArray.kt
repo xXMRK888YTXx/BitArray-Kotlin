@@ -1,13 +1,36 @@
 package BitArray
 
-import java.util.Arrays
-import java.util.BitSet
+import kotlin.math.pow
+
 
 class BitArray {
     private var Array = mutableListOf<Boolean>()
     fun Size():Int {return Array.size}
-    constructor() {
+    fun lastindex():Int {return Size() - 1}
+    constructor() {}
 
+    companion object {
+        fun ToBinaty(Value: Long):BitArray {
+            var temp = Value
+            var BitA = BitArray()
+            while(temp != 1L&&temp != 1L) {
+            BitA.AddBitFront(temp % 2L == 1L)
+            temp /= 2
+            }
+            BitA.AddBitFront(temp == 1L)
+            return BitA
+        }
+        fun FromBinary(BitA:BitArray) : Long {
+        var Sum = 0L
+        var degree = 0
+            for(i in BitA.lastindex() downTo  0) {
+                if(BitA[i]) {
+                    Sum += 2.0.pow(degree).toLong()
+                }
+                degree++
+            }
+            return Sum
+        }
     }
     constructor(Size:Int,Fill:Boolean = false) : this() {
         for(i in 0..Size-1) {
