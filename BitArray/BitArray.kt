@@ -149,4 +149,14 @@ class BitArray() {
         }
         return ThisOb
     }
+    fun Xor(other: BitArray) : BitArray {
+        var ThisOb = BitArray(this)
+        var OtherOb = BitArray(other)
+        if(ThisOb.Size() < OtherOb.Size()) {ThisOb.ResizePrivate(OtherOb.Size())}
+        if(ThisOb.Size() > OtherOb.Size()) {OtherOb.ResizePrivate(ThisOb.Size())}
+        for(i in 0..ThisOb.lastindex()) {
+            ThisOb[i] = ThisOb[i].xor(OtherOb[i])
+        }
+        return ThisOb
+    }
 }
